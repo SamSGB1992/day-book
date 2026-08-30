@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="Day Book"><meta name="theme-color" content="#d9741f">
 <title>SGB Day Book</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -514,7 +514,7 @@ let pendingSync = false;
 let lastSyncedAt = 0;
 
 function redirectUri(){ return location.origin + location.pathname; }
-function loadCfg(){ try{ const r=localStorage.getItem(CFG_KEY); if(r) return JSON.parse(r); }catch(e){} return null; }
+const BAKED_CFG={clientId:"7f9bc2f8-9c15-4218-871d-013e90bc358b",tenantId:"b7b15949-f03a-4f5f-8c54-5d3186b097ca"}; function loadCfg(){ try{ const r=localStorage.getItem(CFG_KEY); if(r) return JSON.parse(r); }catch(e){} return (BAKED_CFG.clientId?BAKED_CFG:null); }
 function saveCfg(c){ try{ localStorage.setItem(CFG_KEY, JSON.stringify(c)); }catch(e){} }
 
 function hhmm(){ const d=new Date(); return String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0"); }
