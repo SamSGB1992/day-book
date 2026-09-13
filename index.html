@@ -1116,17 +1116,31 @@ function ensureRecurInstances(dateStr){
 }
 
 /* ---------- carry-over ---------- */
-// Move all incomplete, non-recurring, non-removed tasks dated before today → today.
+// Move every incomplete, non-removed task dated before today → today.
+// Recurring instances carry too: an unfinished recurring task should follow you
+// forward like anything else, not get stranded on its original day. The one
+// exception is when today already has its own copy of the same recurring rule
+// (e.g. a daily task) — then today's copy stands and we leave the old one be,
+// so you don't end up with two.
 function rollover(){
   const t=todayStr(); let moved=0;
-  for(const task of Object.values(state.tasks)){
+  // generate today's recurring instances first, so we can dedupe carried ones against them
+  ensureRecurInstances(t);
+  const tasks=Object.values(state.tasks);
+  for(const task of tasks){
     if(task.removed) continue;
-    if(task.recurId) continue;            // recurring regenerate on their own schedule
     if(task.done) continue;
-    if(task.date < t){
+    if(task.date >= t) continue;
+    if(task.recurId){
+      const todayHasSameRule = tasks.some(x=>!x.removed && x.recurId===task.recurId && x.date===t && x.id!==task.id);
+      if(todayHasSameRule) continue;      // today's own copy covers it; leave the old one where it is
+      // carry it forward as a normal task so it won't be regenerated on its old date
       if(!task.carriedFrom) task.carriedFrom=task.date;
-      task.date=t; task.updatedAt=nowISO(); moved++;
+      task.date=t; task.recurId=null; task.updatedAt=nowISO(); moved++;
+      continue;
     }
+    if(!task.carriedFrom) task.carriedFrom=task.date;
+    task.date=t; task.updatedAt=nowISO(); moved++;
   }
   return moved;
 }
