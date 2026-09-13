@@ -1099,10 +1099,17 @@ function ensureRecurInstances(dateStr){
     if(!recurMatches(rule,dateStr)) continue;
     const instId = "r_"+rule.id+"_"+dateStr;
     if(!state.tasks[instId]){
+      // IMPORTANT: an auto-generated instance carries a STABLE, OLD updatedAt
+      // (the rule's creation time), never nowISO(). If it used "now", a device
+      // regenerating this instance before it has pulled would out-timestamp a
+      // real "done"/"removed"/edit made on another device, and the merge would
+      // resurrect a ticked-off task. A genuine user action always stamps a
+      // newer time, so it wins; a fresh regeneration ties low and loses.
+      const baseStamp = rule.createdAt || "2000-01-01T00:00:00.000Z";
       state.tasks[instId]={
         id:instId, title:rule.title, date:dateStr, done:false, doneAt:null,
         pri:rule.pri, top3:!!rule.top3, time:rule.time||"", recurId:rule.id, carriedFrom:null,
-        order:Date.now()+Math.random(), createdAt:nowISO(), updatedAt:nowISO(), removed:false
+        order:Date.now()+Math.random(), createdAt:baseStamp, updatedAt:baseStamp, removed:false
       };
     }
   }
@@ -1766,9 +1773,27 @@ function openAppMenu(anchor){
   }));
 }
 
+// Handle the calendar day changing while the app is left open (common on the
+// phone PWA). Without this, a diary left open overnight keeps showing yesterday
+// and yesterday's unfinished tasks never roll until a full reload.
+let lastKnownDay = todayStr();
+function dayTick(){
+  const now=todayStr();
+  if(now===lastKnownDay) return false;
+  const wasOnToday=(viewDate===lastKnownDay);
+  lastKnownDay=now;
+  if(wasOnToday) viewDate=now;         // follow the user onto the new day
+  const moved=rollover();
+  render();
+  if(moved||wasOnToday) scheduleSync();
+  return true;
+}
+setInterval(dayTick, 60000);
+
 // re-check rollover when tab regains focus; flush pending changes before it hides
 document.addEventListener("visibilitychange",()=>{
   if(document.hidden){ flushNow(); return; }
+  dayTick();
   const m=rollover(); if(m){ render(); scheduleSync(); }
   if(online) pullRemote().then(p=>{ if(p>0) toast("Pulled "+p+" item"+(p>1?"s":"")+" from OneDrive."); });
 });
@@ -1786,6 +1811,7 @@ window.addEventListener("beforeunload",flushNow);
   if(!state.welly) state.welly={};
   if(!state.lists) state.lists={};
   try{ activeListId=localStorage.getItem("sgb_active_list")||null; }catch(e){}
+  lastKnownDay=todayStr();
   rollover();
   saveLocal();
   syncComposeUI();
