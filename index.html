@@ -362,6 +362,81 @@ main{max-width:760px;margin:0 auto;padding:8px 18px 40px}
 :root[data-theme="dark"] .awaytoggle.on{background:#3a1f1a;border-color:#7a3b30;color:#e8897b}
 :root[data-theme="dark"] .away-pill{background:#3a1f1a;border-color:#7a3b30;color:#e8897b}
 
+/* wellington marker */
+.cal-day.welly{outline:2px solid #e0a800;outline-offset:-2px}
+.cal-day.welly:not(.selected){background:#fdf3cf}
+:root[data-theme="dark"] .cal-day.welly:not(.selected){background:#3a3410}
+.wellytoggle{border:1px solid var(--line);background:var(--surface-2);color:var(--muted);font-size:12px;font-weight:600;padding:7px 11px;border-radius:9px;display:inline-flex;align-items:center;gap:6px}
+.wellytoggle svg{width:14px;height:14px}
+.wellytoggle.on{background:#fdf3cf;border-color:#e0a800;color:#8a6d00}
+:root[data-theme="dark"] .wellytoggle.on{background:#3a3410;border-color:#e0a800;color:#e6c84d}
+.callegend .lg .y{width:11px;height:11px;border-radius:3px;border:2px solid #e0a800}
+.welly-pill{font-size:11px;font-family:"IBM Plex Mono";letter-spacing:.06em;text-transform:uppercase;color:#8a6d00;background:#fdf3cf;border:1px solid #e0a800;padding:3px 8px;border-radius:20px;margin-left:8px;vertical-align:3px}
+:root[data-theme="dark"] .welly-pill{background:#3a3410;border-color:#e0a800;color:#e6c84d}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) .cal-day.welly:not(.selected){background:#3a3410}
+  :root:not([data-theme="light"]) .wellytoggle.on{background:#3a3410;border-color:#e0a800;color:#e6c84d}
+  :root:not([data-theme="light"]) .welly-pill{background:#3a3410;border-color:#e0a800;color:#e6c84d}
+}
+
+/* time on tasks */
+.chip.time{color:var(--blue);background:var(--blue-soft)}
+.chip.time svg{width:11px;height:11px}
+.timeinput{border:1px solid var(--line);background:var(--surface-2);color:var(--ink-2);font-family:"IBM Plex Mono";font-size:12px;font-weight:500;padding:7px 9px;border-radius:9px}
+.pickhidden{position:fixed;left:50%;bottom:84px;width:1px;height:1px;opacity:0;border:0;padding:0;margin:0;pointer-events:none}
+
+/* outlook meetings (read-only) */
+.mtgwrap{background:var(--blue-soft);border:1px solid color-mix(in srgb,var(--blue) 30%,transparent);border-radius:var(--radius);padding:10px 12px;margin:0 0 14px}
+.mtg-head{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);margin-bottom:7px}
+.mtg-head svg{width:14px;height:14px}
+.mtg{display:flex;gap:10px;align-items:baseline;padding:4px 0;font-size:14px}
+.mtg+.mtg{border-top:1px solid color-mix(in srgb,var(--blue) 15%,transparent)}
+.mtg-time{flex:none;min-width:62px;font-size:12.5px;color:var(--blue);font-weight:600}
+.mtg-sub{color:var(--ink);min-width:0}
+.mtg-loc{display:block;font-size:12px;color:var(--muted)}
+
+/* list photos */
+.addbtn.ghost{background:var(--surface-2);color:var(--ink-2);border:1px solid var(--line-strong)}
+.addbtn.ghost svg{width:20px;height:20px}
+.listphotos{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px;margin:2px 0 12px}
+.listphotos:empty{display:none}
+.lphoto{position:relative;aspect-ratio:1;border-radius:10px;overflow:hidden;background:var(--surface-2);border:1px solid var(--line);cursor:pointer}
+.lphoto img{width:100%;height:100%;object-fit:cover;display:block}
+.photoview{position:fixed;inset:0;z-index:120;background:rgba(10,14,20,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;gap:16px}
+.photoview[hidden]{display:none}
+.photoview img{max-width:100%;max-height:78vh;border-radius:12px;object-fit:contain;background:#000}
+.pv-close{position:absolute;top:14px;right:16px;width:42px;height:42px;border-radius:50%;border:none;background:rgba(255,255,255,.14);color:#fff;font-size:26px;line-height:1;cursor:pointer}
+.pv-remove{border:1px solid rgba(255,255,255,.35);background:transparent;color:#fff;font-weight:600;font-size:14px;padding:10px 20px;border-radius:11px;cursor:pointer}
+.pv-remove:hover{background:rgba(255,255,255,.12)}
+
+/* lists panel */
+.listsbtn.on{background:var(--accent-soft);border-color:color-mix(in srgb,var(--accent) 35%,transparent);color:var(--accent-ink)}
+.listspanel{max-width:760px;margin:6px auto 0;padding:0 18px}
+.listspanel[hidden]{display:none}
+.listshead{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.listsel{flex:1;min-width:0;appearance:none;border:1px solid var(--line-strong);background:var(--surface-2);color:var(--ink);font-weight:600;font-size:14px;padding:9px 12px;border-radius:10px}
+.listnameinput{flex:1;min-width:0;border:1px solid var(--accent);background:var(--surface);color:var(--ink);border-radius:10px;padding:9px 12px;font-size:14px;font-weight:600}
+.listshead .mnav{width:34px;height:34px;border-radius:9px;border:1px solid var(--line);background:var(--surface);color:var(--ink-2);display:grid;place-items:center;flex:none}
+.listshead .mnav:hover{border-color:var(--line-strong);color:var(--ink)}
+.listshead .mnav svg{width:16px;height:16px}
+.listshead .mnav.danger:hover{color:#c0492f;border-color:#c0492f}
+.listitems{display:flex;flex-direction:column;gap:6px;margin-bottom:11px}
+.litem{display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:9px 8px 9px 11px}
+.litem .lcheck{width:20px;height:20px;flex:none;border-radius:6px;border:2px solid var(--line-strong);background:var(--surface);display:grid;place-items:center;cursor:pointer}
+.litem .lcheck svg{width:12px;height:12px;opacity:0;color:#fff}
+.litem.done .lcheck{background:var(--good);border-color:var(--good)}
+.litem.done .lcheck svg{opacity:1}
+.litem .ltext{flex:1;font-size:14.5px;word-break:break-word}
+.litem.done .ltext{text-decoration:line-through;color:var(--muted)}
+.litem .lrm{flex:none;width:28px;height:28px;border-radius:7px;border:none;background:transparent;color:var(--faint);display:grid;place-items:center;cursor:pointer}
+.litem .lrm:hover{background:var(--surface-2);color:var(--ink-2)}
+.litem .lrm svg{width:15px;height:15px}
+.listempty{text-align:center;color:var(--muted);font-size:13.5px;padding:22px 12px}
+.listempty[hidden]{display:none}
+.listaddrow{display:flex;gap:9px}
+.listaddrow[hidden]{display:none}
+@media (max-width:520px){ .syncdot .lbl{display:none} }
+
 /* banner */
 .banner{
   max-width:760px;margin:10px auto 0;padding:10px 14px;border-radius:11px;
@@ -449,6 +524,9 @@ main{max-width:760px;margin:0 auto;padding:8px 18px 40px}
     <button class="iconbtn calbtn" id="calbtn" title="Month calendar" aria-label="Month calendar">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
     </button>
+    <button class="iconbtn listsbtn" id="listsbtn" title="Lists" aria-label="Lists">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+    </button>
     <button class="iconbtn" id="themebtn" title="Toggle light / dark" aria-label="Toggle theme">
       <svg id="themeicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
     </button>
@@ -483,8 +561,28 @@ main{max-width:760px;margin:0 auto;padding:8px 18px 40px}
     <div class="cal-grid" id="calGrid"></div>
     <div class="calhint" id="calHint" hidden>Tap the first and last day you're away.</div>
     <div class="calfoot">
-      <button class="awaytoggle" id="awayToggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4M16 2v4M3 10h18"/><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M8 15l8 0"/></svg>Mark days away</button>
-      <div class="callegend"><span class="lg"><span class="d"></span>has tasks</span><span class="lg"><span class="r"></span>away</span></div>
+      <button class="awaytoggle" id="awayToggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4M16 2v4M3 10h18"/><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M8 15l8 0"/></svg>Away</button>
+      <button class="wellytoggle" id="wellyToggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/></svg>Wellington</button>
+      <div class="callegend"><span class="lg"><span class="d"></span>tasks</span><span class="lg"><span class="r"></span>away</span><span class="lg"><span class="y"></span>Welly</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="listspanel" id="listspanel" hidden>
+  <div class="calcard">
+    <div class="listshead">
+      <select class="listsel" id="listSelect"></select>
+      <button class="mnav" id="listRename" title="Rename list" aria-label="Rename list"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button>
+      <button class="mnav" id="listNew" title="New list" aria-label="New list"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+      <button class="mnav danger" id="listDelete" title="Delete list" aria-label="Delete list"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg></button>
+    </div>
+    <div class="listempty" id="listEmpty" hidden>No lists yet. Tap the plus to make one, like a shopping list or a site-kit checklist.</div>
+    <div class="listitems" id="listItems"></div>
+    <div class="listphotos" id="listPhotos"></div>
+    <div class="listaddrow" id="listAddRow">
+      <input class="addinput" id="listItemInput" placeholder="Add an item…" autocomplete="off" enterkeyhint="done">
+      <button class="addbtn ghost" id="listPhotoBtn" aria-label="Add photo" title="Add a photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></button>
+      <button class="addbtn" id="listItemAdd" aria-label="Add item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
     </div>
   </div>
 </div>
@@ -518,6 +616,7 @@ main{max-width:760px;margin:0 auto;padding:8px 18px 40px}
           <option value="monthly">Monthly</option>
         </select>
       </div>
+      <input type="time" class="timeinput" id="timeinput" aria-label="Time" title="Add a time (optional)">
       <button class="top3toggle" id="top3toggle" title="Mark as a top-3 must-do">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.8 5.9 21.4l1.4-6.8L2.2 9.9l6.9-.8z"/></svg>
         Top 3
@@ -528,6 +627,15 @@ main{max-width:760px;margin:0 auto;padding:8px 18px 40px}
 
 <div class="toast" id="toast"><span id="toastmsg"></span><button id="toastbtn" hidden>Undo</button></div>
 <input type="file" id="importfile" accept="application/json,.json" hidden>
+<input type="file" id="listPhotoFile" accept="image/*" capture="environment" multiple hidden>
+<input type="date" id="movedate" class="pickhidden" aria-hidden="true" tabindex="-1">
+<input type="time" id="settime" class="pickhidden" aria-hidden="true" tabindex="-1">
+
+<div class="photoview" id="photoView" hidden>
+  <button class="pv-close" id="photoViewClose" aria-label="Close">&times;</button>
+  <img id="photoViewImg" alt="">
+  <button class="pv-remove" id="photoViewRemove">Remove photo</button>
+</div>
 
 <div class="gate" id="gate" hidden>
   <div class="gate-card">
@@ -564,11 +672,12 @@ const MON_FULL=["January","February","March","April","May","June","July","August
 /* ---------- state ---------- */
 // task: {id,title,date,done,doneAt,pri(1..3),top3,recurId,carriedFrom,order,createdAt,updatedAt,removed,removedAt}
 // recur rule: {id,title,pri,top3,freq,weekday,monthday,startDate,createdAt,updatedAt,ended}
-let state = { tasks:{}, recurs:{}, away:{}, v:1 };
+let state = { tasks:{}, recurs:{}, away:{}, welly:{}, lists:{}, v:1 };
 let viewDate = todayStr();
-let compose = { pri:1, recur:"none", top3:false };
+let compose = { pri:1, recur:"none", top3:false, time:"" };
 let doneCollapsed = false;
-let calOpen=false, calY=null, calM=null, awayMode=false, awayStart=null;
+let calOpen=false, calY=null, calM=null, awayMode=false, wellyMode=false, awayStart=null;
+let listsOpen=false, activeListId=null;
 
 /* ---------- persistence ---------- */
 function loadLocal(){
@@ -580,13 +689,24 @@ function saveLocal(){ try{ localStorage.setItem(LS_KEY, JSON.stringify(state)); 
 // ---- Microsoft 365 sync ----
 const CFG_KEY = "sgb_daybook_cfg";
 const SCOPES = ["User.Read","Files.ReadWrite"];
+// Calendar is a SEPARATE, optional scope. It is never requested at sign-in,
+// so base sign-in and file sync keep working even if calendar isn't consented.
+const CAL_SCOPES = ["Calendars.ReadWrite"];
 const GRAPH_FILE = "https://graph.microsoft.com/v1.0/me/drive/special/approot:/daybook.json:/content";
+const GRAPH_ROOT = "https://graph.microsoft.com/v1.0/me/drive/special/approot:/";
 let cfg = null;                  // {clientId, tenantId}
 let pca = null, account = null, graphToken = null;
 let online = false;              // signed in AND able to reach Graph
 let syncTimer = null;
 let pendingSync = false;
 let lastSyncedAt = 0;
+// calendar (optional)
+let calToken = null;             // Calendars.ReadWrite token, once consented
+let calEnabled = false;          // we have (or had) calendar access
+let dayMeetings = [];            // meetings fetched for meetingsDate
+let meetingsDate = null;         // which day dayMeetings belongs to
+// photos
+const photoCache = new Map();    // photoId -> object URL (in-memory)
 
 function redirectUri(){ return location.origin + location.pathname; }
 const BAKED_CFG = {clientId:"7f9bc2f8-9c15-4218-871d-013e90bc358b", tenantId:"b7b15949-f03a-4f5f-8c54-5d3186b097ca"};
@@ -606,8 +726,8 @@ function showBanner(on){
 
 // merge two states, last-write-wins per record by updatedAt
 function mergeState(a,b){
-  const out={tasks:{},recurs:{},away:{},v:1};
-  for(const key of ["tasks","recurs","away"]){
+  const out={tasks:{},recurs:{},away:{},welly:{},lists:{},v:1};
+  for(const key of ["tasks","recurs","away","welly","lists"]){
     const ids=new Set([...Object.keys(a[key]||{}),...Object.keys(b[key]||{})]);
     for(const id of ids){
       const x=a[key][id], y=b[key][id];
@@ -652,6 +772,8 @@ async function connect(){
     if(pulled>0) toast("Pulled "+pulled+" item"+(pulled>1?"s":"")+" from OneDrive.");
     // push anything created offline before sign-in
     scheduleSync();
+    // show today's Outlook meetings if calendar was already consented (silent, no prompt)
+    refreshMeetings();
   }catch(e){
     if(e && (e.errorCode==="interaction_required"||e.errorCode==="login_required"||e.errorCode==="consent_required")){
       try{ await pca.acquireTokenRedirect({scopes:SCOPES}); }catch(_){}
@@ -677,6 +799,153 @@ async function graphPut(obj){
   if(!r.ok) throw new Error("Graph PUT "+r.status);
   return true;
 }
+
+// ---- Graph binary read/write (for photos) ----
+function graphContentUrl(path){ return GRAPH_ROOT + path.split("/").map(encodeURIComponent).join("/") + ":/content"; }
+async function graphPutBytes(path, blob){
+  const url=graphContentUrl(path);
+  const hdr=()=>({Authorization:"Bearer "+graphToken,"Content-Type":blob.type||"application/octet-stream"});
+  let r=await fetch(url,{method:"PUT",headers:hdr(),body:blob});
+  if(r.status===401){ await ensureToken(); r=await fetch(url,{method:"PUT",headers:hdr(),body:blob}); }
+  if(!r.ok) throw new Error("Graph PUT bytes "+r.status);
+  return await r.json();
+}
+async function graphGetBytes(path){
+  const url=graphContentUrl(path);
+  let r=await fetch(url,{headers:{Authorization:"Bearer "+graphToken}});
+  if(r.status===401){ await ensureToken(); r=await fetch(url,{headers:{Authorization:"Bearer "+graphToken}}); }
+  if(r.status===404) return null;
+  if(!r.ok) throw new Error("Graph GET bytes "+r.status);
+  return await r.blob();
+}
+
+// ---- calendar (optional, fail-soft) ----
+// Get a calendar token. Silent first; only prompt (popup) when interactive.
+async function getCalToken(interactive){
+  if(!pca || !account) return null;
+  try{ const r=await pca.acquireTokenSilent({scopes:CAL_SCOPES, account}); calToken=r.accessToken; calEnabled=true; return calToken; }
+  catch(e){
+    if(!interactive) return null;
+    try{ const r=await pca.acquireTokenPopup({scopes:CAL_SCOPES, account}); calToken=r.accessToken; calEnabled=true; return calToken; }
+    catch(e2){ return null; }
+  }
+}
+// Create a real, timed event in Outlook. Returns true on success.
+async function outlookCreateEvent(t){
+  const tok=await getCalToken(true);
+  if(!tok) return false;
+  const d=parseYmd(t.date); let sh=9,sm=0;
+  const tm=t.time||parseTimeFromTitle(t.title);
+  if(tm){ const p=tm.split(":"); sh=+p[0]; sm=+p[1]; }
+  d.setHours(sh,sm,0,0);
+  const end=new Date(d.getTime()+30*60000);
+  const iso=x=>{ const p=n=>String(n).padStart(2,"0"); return x.getFullYear()+"-"+p(x.getMonth()+1)+"-"+p(x.getDate())+"T"+p(x.getHours())+":"+p(x.getMinutes())+":00"; };
+  const tz=(Intl.DateTimeFormat().resolvedOptions().timeZone)||"Pacific/Auckland";
+  const payload={ subject:t.title, start:{dateTime:iso(d),timeZone:tz}, end:{dateTime:iso(end),timeZone:tz}, body:{contentType:"text",content:"Added from SGB Day Book"} };
+  const hdr=tk=>({Authorization:"Bearer "+tk,"Content-Type":"application/json"});
+  let r=await fetch("https://graph.microsoft.com/v1.0/me/events",{method:"POST",headers:hdr(tok),body:JSON.stringify(payload)});
+  if(r.status===401){ calToken=null; const t2=await getCalToken(true); if(!t2) return false; r=await fetch("https://graph.microsoft.com/v1.0/me/events",{method:"POST",headers:hdr(t2),body:JSON.stringify(payload)}); }
+  return r.ok;
+}
+function fmtMeetingTime(m){ try{ const s=m.start.dateTime.slice(11,16); return fmtTime(s); }catch(e){ return ""; } }
+// Fetch meetings for the current viewDate. Silent only — never prompts.
+async function refreshMeetings(){
+  if(!online){ dayMeetings=[]; meetingsDate=null; return; }
+  const tok=await getCalToken(false);
+  if(!tok){ dayMeetings=[]; meetingsDate=null; return; }
+  const day=viewDate;
+  const tz=(Intl.DateTimeFormat().resolvedOptions().timeZone)||"Pacific/Auckland";
+  const url="https://graph.microsoft.com/v1.0/me/calendarView?startDateTime="+day+"T00:00:00&endDateTime="+day+"T23:59:59"+
+    "&$select=subject,start,end,isAllDay,location&$orderby=start/dateTime&$top=25";
+  const hdr=tk=>({Authorization:"Bearer "+tk, Prefer:'outlook.timezone="'+tz+'"'});
+  try{
+    let r=await fetch(url,{headers:hdr(tok)});
+    if(r.status===401){ calToken=null; const t2=await getCalToken(false); if(!t2){ dayMeetings=[]; return; } r=await fetch(url,{headers:hdr(t2)}); }
+    if(!r.ok){ dayMeetings=[]; return; }
+    const j=await r.json();
+    dayMeetings=(j.value||[]).map(ev=>({subject:ev.subject||"(no subject)", start:ev.start, end:ev.end, allDay:!!ev.isAllDay, location:(ev.location&&ev.location.displayName)||""}));
+    meetingsDate=day;
+    render();
+  }catch(e){ dayMeetings=[]; }
+}
+// Deliberately turn on calendar access (may prompt once for consent).
+async function enableMeetings(){
+  if(!pca||!account){ toast("Sign in first."); return; }
+  toast("Connecting to your calendar…");
+  const tok=await getCalToken(true);
+  if(!tok){ toast("Couldn't get calendar access. Your admin may need to approve it."); return; }
+  await refreshMeetings();
+  toast(dayMeetings.length?("Showing "+dayMeetings.length+" meeting"+(dayMeetings.length>1?"s":"")+" for this day."):"Calendar connected. No meetings on this day.");
+}
+
+// ---- photos ----
+function downscaleImage(file, maxEdge=1600, quality=0.82){
+  return new Promise((resolve,reject)=>{
+    const url=URL.createObjectURL(file); const img=new Image();
+    img.onload=()=>{
+      URL.revokeObjectURL(url);
+      let w=img.naturalWidth||img.width, h=img.naturalHeight||img.height;
+      if(!w||!h){ reject(new Error("bad image")); return; }
+      const scale=Math.min(1, maxEdge/Math.max(w,h));
+      const cw=Math.max(1,Math.round(w*scale)), ch=Math.max(1,Math.round(h*scale));
+      const cnv=document.createElement("canvas"); cnv.width=cw; cnv.height=ch;
+      cnv.getContext("2d").drawImage(img,0,0,cw,ch);
+      cnv.toBlob(b=>{ b?resolve({blob:b,w:cw,h:ch}):reject(new Error("encode failed")); }, "image/jpeg", quality);
+    };
+    img.onerror=()=>{ URL.revokeObjectURL(url); reject(new Error("bad image")); };
+    img.src=url;
+  });
+}
+async function addListPhotos(files){
+  if(!activeListId){ toast("Pick or make a list first."); return; }
+  const l=state.lists[activeListId]; if(!l) return;
+  if(!online){ toast("Connect first — photos need sign-in to save."); return; }
+  if(!Array.isArray(l.photos)) l.photos=[];
+  let n=0, fails=0;
+  for(const f of Array.from(files)){
+    if(!f.type || !f.type.startsWith("image/")){ continue; }
+    try{
+      toast("Adding photo…");
+      const {blob,w,h}=await downscaleImage(f);
+      const pid="ph"+uid();
+      await graphPutBytes("photos/"+pid+".jpg", blob);
+      photoCache.set(pid, URL.createObjectURL(blob));
+      l.photos.push({id:pid, name:(f.name||"photo.jpg"), w, h, addedAt:nowISO()});
+      n++;
+    }catch(e){ fails++; }
+  }
+  if(n){ l.updatedAt=nowISO(); scheduleSync(); renderLists(); }
+  toast(n?(n+" photo"+(n>1?"s":"")+" added."+(fails?" "+fails+" failed.":"")):"Couldn't add "+(fails>1?"those photos.":"that photo."));
+}
+async function loadPhotoThumbs(){
+  const l=activeListId?state.lists[activeListId]:null;
+  const photos=(l&&l.photos)||[];
+  for(const p of photos){
+    if(photoCache.has(p.id)) continue;
+    try{
+      const blob=await graphGetBytes("photos/"+p.id+".jpg");
+      if(blob){ const u=URL.createObjectURL(blob); photoCache.set(p.id,u);
+        document.querySelectorAll('.lphoto[data-p="'+p.id+'"] img').forEach(im=>im.src=u); }
+    }catch(e){}
+  }
+}
+function removeListPhoto(pid){
+  const l=activeListId?state.lists[activeListId]:null; if(!l||!Array.isArray(l.photos)) return;
+  const idx=l.photos.findIndex(p=>p.id===pid); if(idx<0) return;
+  const removed=l.photos[idx];
+  l.photos.splice(idx,1); l.updatedAt=nowISO(); scheduleSync(); renderLists(); closePhotoView();
+  // soft-remove: the OneDrive file is kept, so this is undoable
+  toast("Photo removed.", "Undo", ()=>{ const lx=state.lists[activeListId]; if(lx){ if(!Array.isArray(lx.photos))lx.photos=[]; lx.photos.splice(Math.min(idx,lx.photos.length),0,removed); lx.updatedAt=nowISO(); scheduleSync(); renderLists(); } });
+}
+function openPhotoView(pid){
+  const l=activeListId?state.lists[activeListId]:null; if(!l) return;
+  const p=(l.photos||[]).find(x=>x.id===pid); if(!p) return;
+  const v=document.getElementById("photoView"); const img=document.getElementById("photoViewImg");
+  img.src=photoCache.get(pid)||""; if(!photoCache.get(pid)){ graphGetBytes("photos/"+pid+".jpg").then(b=>{ if(b){ const u=URL.createObjectURL(b); photoCache.set(pid,u); img.src=u; } }).catch(()=>{}); }
+  document.getElementById("photoViewRemove").onclick=()=>removeListPhoto(pid);
+  v.hidden=false;
+}
+function closePhotoView(){ const v=document.getElementById("photoView"); if(v) v.hidden=true; }
 
 async function pullRemote(){
   if(!online) return 0;
@@ -828,7 +1097,7 @@ function ensureRecurInstances(dateStr){
     if(!state.tasks[instId]){
       state.tasks[instId]={
         id:instId, title:rule.title, date:dateStr, done:false, doneAt:null,
-        pri:rule.pri, top3:!!rule.top3, recurId:rule.id, carriedFrom:null,
+        pri:rule.pri, top3:!!rule.top3, time:rule.time||"", recurId:rule.id, carriedFrom:null,
         order:Date.now()+Math.random(), createdAt:nowISO(), updatedAt:nowISO(), removed:false
       };
     }
@@ -863,6 +1132,11 @@ function setAway(dstr,on){
   if(on){ state.away[dstr]={date:dstr,updatedAt:nowISO(),removed:false}; }
   else if(state.away[dstr]){ state.away[dstr].removed=true; state.away[dstr].updatedAt=nowISO(); }
 }
+function isWelly(dstr){ const a=state.welly[dstr]; return !!(a && !a.removed); }
+function setWelly(dstr,on){
+  if(on){ state.welly[dstr]={date:dstr,updatedAt:nowISO(),removed:false}; }
+  else if(state.welly[dstr]){ state.welly[dstr].removed=true; state.welly[dstr].updatedAt=nowISO(); }
+}
 function datesBetween(a,b){ const out=[]; let d=a,g=0; while(d<=b && g<400){ out.push(d); d=addDays(d,1); g++; } return out; }
 function dayHasTasks(dstr){
   for(const t of Object.values(state.tasks)){ if(!t.removed && t.date===dstr) return true; }
@@ -871,7 +1145,7 @@ function dayHasTasks(dstr){
 }
 function toggleCal(){
   calOpen=!calOpen;
-  if(calOpen){ const d=parseYmd(viewDate); calY=d.getFullYear(); calM=d.getMonth(); awayMode=false; awayStart=null; renderCal(); }
+  if(calOpen){ if(listsOpen){ listsOpen=false; document.getElementById("listspanel").hidden=true; document.getElementById("listsbtn").classList.remove("on"); } const d=parseYmd(viewDate); calY=d.getFullYear(); calM=d.getMonth(); awayMode=false; wellyMode=false; awayStart=null; renderCal(); }
   document.getElementById("calpanel").hidden=!calOpen;
   document.getElementById("calbtn").classList.toggle("on",calOpen);
 }
@@ -893,24 +1167,34 @@ function renderCal(){
     if(ds===tstr) cls+=" today";
     if(ds===viewDate) cls+=" selected";
     if(isAway(ds)) cls+=" away";
+    if(isWelly(ds)) cls+=" welly";
     if(awayStart===ds) cls+=" pending";
     html+='<div class="'+cls+'" data-d="'+ds+'">'+d.getDate()+(dayHasTasks(ds)?'<span class="cdot"></span>':'')+'</div>';
   }
   grid.innerHTML=html;
   document.getElementById("awayToggle").classList.toggle("on",awayMode);
-  document.getElementById("calHint").hidden=!awayMode;
+  document.getElementById("wellyToggle").classList.toggle("on",wellyMode);
+  const hint=document.getElementById("calHint");
+  hint.hidden=!(awayMode||wellyMode);
+  hint.textContent = wellyMode ? "Tap the first and last day you're in Wellington." : "Tap the first and last day you're away.";
 }
 function onCalDay(ds){
-  if(!awayMode){ viewDate=ds; awayStart=null; closeCal(); render(); return; }
+  const mode = awayMode ? "away" : (wellyMode ? "welly" : null);
+  if(!mode){ viewDate=ds; awayStart=null; closeCal(); render(); return; }
   if(!awayStart){ awayStart=ds; renderCal(); return; }
   const lo=awayStart<ds?awayStart:ds, hi=awayStart<ds?ds:awayStart;
   const days=datesBetween(lo,hi);
-  const allAway=days.every(isAway);
-  days.forEach(x=>setAway(x,!allAway));
+  if(mode==="away"){
+    const all=days.every(isAway); days.forEach(x=>setAway(x,!all));
+    toast(all?("Cleared "+days.length+" day"+(days.length>1?"s":"")):("Marked "+days.length+" day"+(days.length>1?"s":"")+" away"));
+  } else {
+    const all=days.every(isWelly); days.forEach(x=>setWelly(x,!all));
+    toast(all?("Cleared Wellington on "+days.length+" day"+(days.length>1?"s":"")):(days.length+" day"+(days.length>1?"s":"")+" in Wellington"));
+  }
   awayStart=null; scheduleSync(); renderCal(); render();
-  toast(allAway?("Cleared "+days.length+" day"+(days.length>1?"s":"")):("Marked "+days.length+" day"+(days.length>1?"s":"")+" away"));
 }
-function toggleAwayMode(){ awayMode=!awayMode; awayStart=null; renderCal(); }
+function toggleAwayMode(){ awayMode=!awayMode; if(awayMode) wellyMode=false; awayStart=null; renderCal(); }
+function toggleWellyMode(){ wellyMode=!wellyMode; if(wellyMode) awayMode=false; awayStart=null; renderCal(); }
 
 /* ---------- rendering ---------- */
 const ICON = {
@@ -925,11 +1209,20 @@ const ICON = {
   copy:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>',
   trash:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>',
   chev:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>',
+  clock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
 };
 const PRINAME={1:"Must do",2:"Important",3:"If time"};
 const RECURNAME={daily:"Daily",weekdays:"Weekdays",weekly:"Weekly",monthly:"Monthly"};
 
 function esc(s){ return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+function fmtTime(hm){ if(!hm) return ""; const p=hm.split(":"); let h=+p[0]; const m=+p[1]; const ap=h<12?"am":"pm"; let h12=h%12; if(h12===0)h12=12; return h12+(m?(":"+String(m).padStart(2,"0")):"")+ap; }
+function parseTimeFromTitle(str){
+  let m=str.match(/(?:^|\s)(\d{1,2})(?::(\d{2}))?\s*(am|pm)\b/i);
+  if(m){ let h=parseInt(m[1],10)%12; if(/pm/i.test(m[3])) h+=12; const mm=m[2]?parseInt(m[2],10):0; if(h>=0&&h<24&&mm<60) return String(h).padStart(2,"0")+":"+String(mm).padStart(2,"0"); }
+  m=str.match(/(?:^|\s)([01]?\d|2[0-3]):([0-5]\d)\b/);
+  if(m){ return String(parseInt(m[1],10)).padStart(2,"0")+":"+m[2]; }
+  return "";
+}
 
 function taskEl(task){
   const el=document.createElement("div");
@@ -938,6 +1231,7 @@ function taskEl(task){
   el.setAttribute("draggable","false");
   const chips=[];
   chips.push(`<span class="chip pri${task.pri}">${PRINAME[task.pri]}</span>`);
+  if(task.time){ chips.push(`<span class="chip time">${ICON.clock}${fmtTime(task.time)}</span>`); }
   if(task.recurId){ const r=state.recurs[task.recurId]; let rlbl=r?(RECURNAME[r.freq]||"Repeats"):"Repeats"; if(r&&r.freq==="weekly"&&r.weekday!=null) rlbl="Every "+DOW[r.weekday].slice(0,3); chips.push(`<span class="chip recur">${ICON.repeat}${rlbl}</span>`); }
   if(task.carriedFrom && !task.done){ const d=parseYmd(task.carriedFrom); chips.push(`<span class="chip carried" title="Carried forward from ${DOW[d.getDay()]} ${d.getDate()} ${MON[d.getMonth()]}">${ICON.arrow}carried</span>`); }
   el.innerHTML=`
@@ -962,7 +1256,7 @@ function render(){
   else if(viewDate===addDays(t,-1)) dayLabel="Yesterday";
   else if(viewDate===addDays(t,1)) dayLabel="Tomorrow";
   else dayLabel=DOW[d.getDay()];
-  document.getElementById("dayLabel").innerHTML = esc(dayLabel) + (viewDate===t?'<span class="today-pill">today</span>':"") + (isAway(viewDate)?'<span class="away-pill">Away</span>':"");
+  document.getElementById("dayLabel").innerHTML = esc(dayLabel) + (viewDate===t?'<span class="today-pill">today</span>':"") + (isAway(viewDate)?'<span class="away-pill">Away</span>':"") + (isWelly(viewDate)?'<span class="welly-pill">Wellington</span>':"");
   if(calOpen) renderCal();
   document.getElementById("fullDate").textContent = `${DOW[d.getDay()]}, ${d.getDate()} ${MON[d.getMonth()]} ${d.getFullYear()}`;
 
@@ -974,6 +1268,14 @@ function render(){
 
   const main=document.getElementById("main");
   main.innerHTML="";
+
+  // Outlook meetings for this day (read-only, pulled from your calendar)
+  if(calEnabled && meetingsDate===viewDate && dayMeetings.length){
+    const mw=document.createElement("div"); mw.className="mtgwrap";
+    mw.innerHTML='<div class="mtg-head">'+ICON.cal+'From your Outlook</div>'+
+      dayMeetings.map(m=>'<div class="mtg"><span class="mtg-time mono">'+esc(m.allDay?"All day":fmtMeetingTime(m))+'</span><span class="mtg-sub">'+esc(m.subject)+(m.location?'<span class="mtg-loc">'+esc(m.location)+'</span>':'')+'</span></div>').join("");
+    main.appendChild(mw);
+  }
 
   // top 3 zone
   const t3=document.createElement("div");
@@ -1078,39 +1380,65 @@ function stopSeries(id){
 function addTask(){
   const inp=document.getElementById("addinput");
   const title=inp.value.trim(); if(!title) return;
+  const ttime = compose.time || parseTimeFromTitle(title) || "";
   if(compose.recur!=="none"){
     // create a recurring rule + instance for the viewed day
     const rid="r"+uid();
     const d=parseYmd(viewDate);
     let rfreq=compose.recur, rweekday=d.getDay();
     if(compose.recur.slice(0,2)==="wk"){ rfreq="weekly"; rweekday=parseInt(compose.recur.slice(2),10); }
-    state.recurs[rid]={ id:rid, title, pri:compose.pri, top3:compose.top3, freq:rfreq,
+    state.recurs[rid]={ id:rid, title, pri:compose.pri, top3:compose.top3, time:ttime, freq:rfreq,
       weekday:rweekday, monthday:d.getDate(), startDate:viewDate, createdAt:nowISO(), updatedAt:nowISO(), ended:false };
   } else {
     const id=uid();
-    state.tasks[id]={ id, title, date:viewDate, done:false, doneAt:null, pri:compose.pri,
+    state.tasks[id]={ id, title, date:viewDate, done:false, doneAt:null, pri:compose.pri, time:ttime,
       top3:compose.top3 && (tasksForDay(viewDate).filter(x=>!x.done&&x.top3).length<3),
       recurId:null, carriedFrom:null, order:Date.now(), createdAt:nowISO(), updatedAt:nowISO(), removed:false };
   }
-  inp.value=""; compose.top3=false; syncComposeUI();
+  inp.value=""; compose.top3=false; compose.time=""; syncComposeUI();
   scheduleSync(); render();
   inp.focus();
 }
 
-/* ---------- calendar (Outlook deeplink) ---------- */
-function addToOutlook(id){
+/* ---------- calendar ---------- */
+// Preferred path: create the event directly via Graph (no extra tab, real time).
+// Falls back to the deep link when calendar access isn't granted or we're offline.
+async function addToOutlook(id){
   const t=getTask(id); if(!t) return;
-  const d=parseYmd(t.date); d.setHours(9,0,0,0);
+  if(online){
+    toast("Adding to Outlook…");
+    try{
+      const ok=await outlookCreateEvent(t);
+      if(ok){
+        const tm=t.time||parseTimeFromTitle(t.title);
+        toast(tm?("Added to Outlook at "+fmtTime(tm)+"."):"Added to Outlook.");
+        refreshMeetings();
+        return;
+      }
+    }catch(e){}
+  }
+  addToOutlookLink(t);
+}
+// Deep-link fallback: opens Outlook compose in a new tab (via a real anchor so
+// it doesn't take over the installed app window).
+function addToOutlookLink(t){
+  const d=parseYmd(t.date);
+  let sh=9, sm=0;
+  const tm = t.time || parseTimeFromTitle(t.title);
+  if(tm){ const p=tm.split(":"); sh=+p[0]; sm=+p[1]; }
+  d.setHours(sh,sm,0,0);
   const end=new Date(d.getTime()+30*60000);
-  const fmt=x=>x.toISOString();
+  const fmtLocal=x=>{ const p=n=>String(n).padStart(2,"0"); return x.getFullYear()+"-"+p(x.getMonth()+1)+"-"+p(x.getDate())+"T"+p(x.getHours())+":"+p(x.getMinutes())+":00"; };
   const url="https://outlook.office.com/calendar/0/deeplink/compose?"+
     "path=/calendar/action/compose&rru=addevent"+
     "&subject="+encodeURIComponent(t.title)+
-    "&startdt="+encodeURIComponent(fmt(d))+
-    "&enddt="+encodeURIComponent(fmt(end))+
+    "&startdt="+encodeURIComponent(fmtLocal(d))+
+    "&enddt="+encodeURIComponent(fmtLocal(end))+
     "&body="+encodeURIComponent("Added from SGB Day Book");
-  window.open(url,"_blank","noopener");
-  toast("Opening Outlook — pick your time and save.");
+  const a=document.createElement("a");
+  a.href=url; a.target="_blank"; a.rel="noopener noreferrer";
+  document.body.appendChild(a); a.click(); a.remove();
+  toast(tm?("Opening Outlook at "+fmtTime(tm)+"…"):"Opening Outlook — set your time and save.");
 }
 
 /* ---------- context menu ---------- */
@@ -1132,8 +1460,10 @@ function openMenu(id,anchor){
     </div>
     <div class="sep"></div>
     <button data-m="top3">${ICON.star}${isTop3?"Remove from top-3":"Make top-3"}</button>
+    <button data-m="settime">${ICON.clock}${t.time?("Time: "+fmtTime(t.time)):"Set time"}</button>
     <button data-m="cal">${ICON.cal}Add to Outlook Calendar</button>
     <button data-m="tomorrow">${ICON.arrow}Move to tomorrow</button>
+    <button data-m="moveday">${ICON.cal}Move to date…</button>
     <button data-m="edit">${ICON.edit}Rename</button>
     <button data-m="dup">${ICON.copy}Duplicate</button>
     ${t.recurId?`<div class="sep"></div><button data-m="stopseries">${ICON.repeat}Stop future repeats</button>`:""}
@@ -1149,13 +1479,27 @@ function openMenu(id,anchor){
   menuEl.querySelectorAll("[data-m]").forEach(b=>b.addEventListener("click",()=>{
     const m=b.dataset.m; closeMenu();
     if(m==="top3") toggleTop3(id);
+    else if(m==="settime") openSetTime(id);
     else if(m==="cal") addToOutlook(id);
     else if(m==="tomorrow") moveToDay(id, addDays(viewDate,1));
+    else if(m==="moveday") openMoveDate(id);
     else if(m==="edit") startEdit(id);
     else if(m==="dup") duplicateTask(id);
     else if(m==="stopseries") stopSeries(id);
     else if(m==="remove") removeTask(id);
   }));
+}
+function openSetTime(id){
+  const t=getTask(id); if(!t) return;
+  const inp=document.getElementById("settime"); inp.value=t.time||"";
+  inp.onchange=()=>{ const v=inp.value; const tk=getTask(id); if(tk){ tk.time=v; touch(tk); if(tk.recurId&&state.recurs[tk.recurId]){ state.recurs[tk.recurId].time=v; touch(state.recurs[tk.recurId]); } scheduleSync(); render(); toast(v?("Time set to "+fmtTime(v)):"Time cleared"); } inp.onchange=null; };
+  try{ if(inp.showPicker) inp.showPicker(); else { inp.focus(); inp.click(); } }catch(e){ inp.focus(); }
+}
+function openMoveDate(id){
+  const t=getTask(id); if(!t) return;
+  const inp=document.getElementById("movedate"); inp.value=t.date||todayStr();
+  inp.onchange=()=>{ const v=inp.value; if(v) moveToDay(id,v); inp.onchange=null; };
+  try{ if(inp.showPicker) inp.showPicker(); else { inp.focus(); inp.click(); } }catch(e){ inp.focus(); }
 }
 
 /* ---------- inline edit ---------- */
@@ -1236,6 +1580,90 @@ function syncComposeUI(){
   document.querySelectorAll("#priseg button").forEach(b=>b.classList.toggle("on",+b.dataset.pri===compose.pri));
   document.getElementById("recsel").value=compose.recur;
   document.getElementById("top3toggle").classList.toggle("on",compose.top3);
+  const ti=document.getElementById("timeinput"); if(ti) ti.value=compose.time||"";
+}
+
+/* ---------- lists ---------- */
+function activeLists(){ return Object.values(state.lists).filter(l=>!l.removed).sort((a,b)=>(a.order||0)-(b.order||0)); }
+function ensureActiveList(){
+  const ls=activeLists();
+  if(ls.length===0){ activeListId=null; return; }
+  if(!activeListId || !state.lists[activeListId] || state.lists[activeListId].removed) activeListId=ls[0].id;
+}
+function toggleLists(){
+  listsOpen=!listsOpen;
+  if(listsOpen && calOpen){ calOpen=false; document.getElementById("calpanel").hidden=true; document.getElementById("calbtn").classList.remove("on"); }
+  document.getElementById("listspanel").hidden=!listsOpen;
+  document.getElementById("listsbtn").classList.toggle("on",listsOpen);
+  if(listsOpen){ ensureActiveList(); renderLists(); }
+}
+function addList(){
+  const id="l"+uid();
+  state.lists[id]={ id, name:"Untitled list", items:[], order:Date.now(), createdAt:nowISO(), updatedAt:nowISO(), removed:false };
+  activeListId=id; try{ localStorage.setItem("sgb_active_list",id); }catch(e){}
+  scheduleSync(); renderLists(); startRenameList();
+}
+function deleteList(){
+  if(!activeListId) return; const l=state.lists[activeListId]; if(!l) return;
+  const gone=activeListId; l.removed=true; l.updatedAt=nowISO();
+  activeListId=null; ensureActiveList(); scheduleSync(); renderLists();
+  toast('List "'+l.name+'" removed.', "Undo", ()=>{ const x=state.lists[gone]; if(x){ x.removed=false; x.updatedAt=nowISO(); activeListId=gone; scheduleSync(); renderLists(); } });
+}
+function selectList(id){ activeListId=id; try{ localStorage.setItem("sgb_active_list",id); }catch(e){} renderLists(); }
+function mkListSelect(){ const s=document.createElement("select"); s.className="listsel"; s.id="listSelect"; s.addEventListener("change",()=>selectList(s.value)); return s; }
+function startRenameList(){
+  if(!activeListId) return; const l=state.lists[activeListId]; if(!l) return;
+  const sel=document.getElementById("listSelect"); if(!sel) return;
+  const inp=document.createElement("input"); inp.className="listnameinput"; inp.value=l.name;
+  sel.replaceWith(inp); inp.focus(); inp.select();
+  let finished=false;
+  const done=(save)=>{ if(finished) return; finished=true; if(save){ const v=inp.value.trim()||"Untitled list"; l.name=v; l.updatedAt=nowISO(); scheduleSync(); } const ns=mkListSelect(); inp.replaceWith(ns); renderLists(); };
+  inp.addEventListener("keydown",e=>{ if(e.key==="Enter"){e.preventDefault();done(true);} else if(e.key==="Escape"){e.preventDefault();done(false);} });
+  inp.addEventListener("blur",()=>done(true));
+}
+function addListItem(){
+  const inp=document.getElementById("listItemInput"); const v=inp.value.trim(); if(!v||!activeListId) return;
+  const l=state.lists[activeListId]; if(!l) return;
+  if(!Array.isArray(l.items)) l.items=[];
+  l.items.push({ id:uid(), text:v, done:false }); l.updatedAt=nowISO();
+  inp.value=""; scheduleSync(); renderLists(); inp.focus();
+}
+function toggleListItem(itemId){
+  const l=state.lists[activeListId]; if(!l) return;
+  const it=(l.items||[]).find(x=>x.id===itemId); if(it){ it.done=!it.done; l.updatedAt=nowISO(); scheduleSync(); renderLists(); }
+}
+function removeListItem(itemId){
+  const l=state.lists[activeListId]; if(!l) return;
+  l.items=(l.items||[]).filter(x=>x.id!==itemId); l.updatedAt=nowISO(); scheduleSync(); renderLists();
+}
+function renderLists(){
+  const panel=document.getElementById("listspanel"); if(!panel) return;
+  const sel=document.getElementById("listSelect"); if(!sel) return; // rename input in progress
+  const ls=activeLists();
+  const empty=document.getElementById("listEmpty");
+  const itemsEl=document.getElementById("listItems");
+  const addRow=document.getElementById("listAddRow");
+  const photosEl=document.getElementById("listPhotos");
+  const renameBtn=document.getElementById("listRename"), delBtn=document.getElementById("listDelete");
+  if(ls.length===0){
+    sel.innerHTML='<option>No lists</option>'; sel.disabled=true; renameBtn.disabled=true; delBtn.disabled=true;
+    empty.hidden=false; itemsEl.innerHTML=""; if(photosEl) photosEl.innerHTML=""; addRow.hidden=true; return;
+  }
+  ensureActiveList();
+  sel.disabled=false; renameBtn.disabled=false; delBtn.disabled=false; empty.hidden=true; addRow.hidden=false;
+  sel.innerHTML=ls.map(l=>'<option value="'+l.id+'"'+(l.id===activeListId?' selected':'')+'>'+esc(l.name)+'</option>').join("");
+  const l=state.lists[activeListId]; const items=l.items||[];
+  itemsEl.innerHTML = items.length
+    ? items.map(it=>'<div class="litem'+(it.done?' done':'')+'" data-i="'+it.id+'"><button class="lcheck" data-la="toggle" aria-label="Tick">'+ICON.check+'</button><span class="ltext">'+esc(it.text)+'</span><button class="lrm" data-la="rm" aria-label="Remove">'+ICON.trash+'</button></div>').join("")
+    : '<div class="listempty" style="display:block">This list is empty. Add an item or a photo below.</div>';
+  // photos
+  const photos=l.photos||[];
+  if(photosEl){
+    photosEl.innerHTML = photos.length
+      ? photos.map(p=>'<div class="lphoto" data-p="'+p.id+'"><img alt="'+esc(p.name||"photo")+'" src="'+(photoCache.get(p.id)||"")+'" loading="lazy"></div>').join("")
+      : "";
+    if(photos.length) loadPhotoThumbs();
+  }
 }
 
 /* ---------- theme ---------- */
@@ -1274,15 +1702,30 @@ document.getElementById("addinput").addEventListener("keydown",e=>{ if(e.key==="
 document.getElementById("priseg").addEventListener("click",e=>{ const b=e.target.closest("button"); if(!b)return; compose.pri=+b.dataset.pri; syncComposeUI(); });
 document.getElementById("recsel").addEventListener("change",e=>{ compose.recur=e.target.value; });
 document.getElementById("top3toggle").addEventListener("click",()=>{ compose.top3=!compose.top3; syncComposeUI(); });
-document.getElementById("prevday").addEventListener("click",()=>{ viewDate=addDays(viewDate,-1); doneCollapsed=false; render(); });
-document.getElementById("nextday").addEventListener("click",()=>{ viewDate=addDays(viewDate,1); doneCollapsed=false; render(); });
-document.getElementById("todaybtn").addEventListener("click",()=>{ viewDate=todayStr(); rollover(); doneCollapsed=false; scheduleSync(); render(); });
+document.getElementById("prevday").addEventListener("click",()=>{ viewDate=addDays(viewDate,-1); doneCollapsed=false; render(); refreshMeetings(); });
+document.getElementById("nextday").addEventListener("click",()=>{ viewDate=addDays(viewDate,1); doneCollapsed=false; render(); refreshMeetings(); });
+document.getElementById("todaybtn").addEventListener("click",()=>{ viewDate=todayStr(); rollover(); doneCollapsed=false; scheduleSync(); render(); refreshMeetings(); });
 document.getElementById("themebtn").addEventListener("click",toggleTheme);
 document.getElementById("calbtn").addEventListener("click",toggleCal);
 document.getElementById("calPrev").addEventListener("click",()=>calShift(-1));
 document.getElementById("calNext").addEventListener("click",()=>calShift(1));
 document.getElementById("awayToggle").addEventListener("click",toggleAwayMode);
 document.getElementById("calGrid").addEventListener("click",e=>{ const c=e.target.closest(".cal-day"); if(c) onCalDay(c.dataset.d); });
+document.getElementById("wellyToggle").addEventListener("click",toggleWellyMode);
+document.getElementById("timeinput").addEventListener("change",e=>{ compose.time=e.target.value; });
+document.getElementById("listsbtn").addEventListener("click",toggleLists);
+document.getElementById("listSelect").addEventListener("change",e=>selectList(e.target.value));
+document.getElementById("listNew").addEventListener("click",addList);
+document.getElementById("listRename").addEventListener("click",startRenameList);
+document.getElementById("listDelete").addEventListener("click",deleteList);
+document.getElementById("listItemAdd").addEventListener("click",addListItem);
+document.getElementById("listItemInput").addEventListener("keydown",e=>{ if(e.key==="Enter") addListItem(); });
+document.getElementById("listItems").addEventListener("click",e=>{ const row=e.target.closest(".litem"); if(!row) return; const a=e.target.closest("[data-la]"); if(!a) return; if(a.dataset.la==="toggle") toggleListItem(row.dataset.i); else if(a.dataset.la==="rm") removeListItem(row.dataset.i); });
+document.getElementById("listPhotoBtn").addEventListener("click",()=>{ if(!activeListId){ toast("Pick or make a list first."); return; } document.getElementById("listPhotoFile").click(); });
+document.getElementById("listPhotoFile").addEventListener("change",e=>{ const fs=e.target.files; if(fs&&fs.length) addListPhotos(fs); e.target.value=""; });
+document.getElementById("listPhotos").addEventListener("click",e=>{ const ph=e.target.closest(".lphoto"); if(ph) openPhotoView(ph.dataset.p); });
+document.getElementById("photoViewClose").addEventListener("click",closePhotoView);
+document.getElementById("photoView").addEventListener("click",e=>{ if(e.target.id==="photoView") closePhotoView(); });
 window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change",updateThemeIcon);
 window.addEventListener("keydown",e=>{ if(e.key==="Escape") closeMenu(); });
 
@@ -1300,6 +1743,7 @@ function openAppMenu(anchor){
   menuEl.innerHTML=`
     ${acct?`<div class="subhead">Signed in</div><div class="acctline">${esc(acct)}</div><div class="sep"></div>`:""}
     <button data-a="sync">${ICON.repeat}Sync now</button>
+    <button data-a="calon">${ICON.cal}${calEnabled?"Refresh Outlook meetings":"Show my Outlook meetings"}</button>
     <div class="sep"></div>
     <button data-a="export">${ICON.cal}Export backup (.json)</button>
     <button data-a="import">${ICON.copy}Restore from backup</button>
@@ -1311,6 +1755,7 @@ function openAppMenu(anchor){
   menuEl.querySelectorAll("[data-a]").forEach(b=>b.addEventListener("click",()=>{
     const a=b.dataset.a; closeMenu();
     if(a==="sync") manualSync();
+    else if(a==="calon") enableMeetings();
     else if(a==="export") exportBackup();
     else if(a==="import") document.getElementById("importfile").click();
     else if(a==="signout") signOut();
@@ -1334,6 +1779,9 @@ window.addEventListener("beforeunload",flushNow);
   if(!state.tasks) state.tasks={};
   if(!state.recurs) state.recurs={};
   if(!state.away) state.away={};
+  if(!state.welly) state.welly={};
+  if(!state.lists) state.lists={};
+  try{ activeListId=localStorage.getItem("sgb_active_list")||null; }catch(e){}
   rollover();
   saveLocal();
   syncComposeUI();
