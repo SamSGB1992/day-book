@@ -855,7 +855,11 @@ async function refreshMeetings(){
   if(!tok){ dayMeetings=[]; meetingsDate=null; return; }
   const day=viewDate;
   const tz=(Intl.DateTimeFormat().resolvedOptions().timeZone)||"Pacific/Auckland";
-  const url="https://graph.microsoft.com/v1.0/me/calendarView?startDateTime="+day+"T00:00:00&endDateTime="+day+"T23:59:59"+
+  // calendarView interprets the window bounds as UTC, so send this day's LOCAL
+  // midnight-to-midnight converted to UTC instants (otherwise we grab the wrong 24h).
+  const d0=parseYmd(day);                                  // local midnight of viewDate
+  const d1=new Date(d0.getTime()+24*60*60000);             // local next midnight
+  const url="https://graph.microsoft.com/v1.0/me/calendarView?startDateTime="+encodeURIComponent(d0.toISOString())+"&endDateTime="+encodeURIComponent(d1.toISOString())+
     "&$select=subject,start,end,isAllDay,location&$orderby=start/dateTime&$top=25";
   const hdr=tk=>({Authorization:"Bearer "+tk, Prefer:'outlook.timezone="'+tz+'"'});
   try{
