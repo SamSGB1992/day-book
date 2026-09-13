@@ -659,7 +659,7 @@ const DATA_FILE = "data.json";
 // Bump this string on EVERY deploy. On load the app fetches its own file and,
 // if the deployed version is newer than the running one, reloads once (with a
 // cache-busting query) so nobody gets stuck on a stale cached copy.
-const APP_VERSION = "2026-09-14a";
+const APP_VERSION = "2026-09-14b";
 async function checkForUpdate(){
   try{
     const r = await fetch("index.html?vc="+Date.now(), {cache:"no-store"});
@@ -1438,7 +1438,10 @@ function addTask(){
       top3:compose.top3 && (tasksForDay(viewDate).filter(x=>!x.done&&x.top3).length<3),
       recurId:null, carriedFrom:null, order:Date.now(), createdAt:nowISO(), updatedAt:nowISO(), removed:false };
   }
-  inp.value=""; compose.top3=false; compose.time=""; syncComposeUI();
+  // reset the per-task controls so the next task starts fresh. compose.recur is
+  // reset too: leaving it "sticky" silently tagged following one-off tasks as
+  // repeating, which is how a few tasks became recurring by accident.
+  inp.value=""; compose.top3=false; compose.time=""; compose.recur="none"; syncComposeUI();
   scheduleSync(); render();
   inp.focus();
 }
