@@ -659,7 +659,7 @@ const DATA_FILE = "data.json";
 // Bump this string on EVERY deploy. On load the app fetches its own file and,
 // if the deployed version is newer than the running one, reloads once (with a
 // cache-busting query) so nobody gets stuck on a stale cached copy.
-const APP_VERSION = "2026-09-14b";
+const APP_VERSION = "2026-09-27a";
 async function checkForUpdate(){
   try{
     const r = await fetch("index.html?vc="+Date.now(), {cache:"no-store"});
@@ -1140,6 +1140,15 @@ function ensureRecurInstances(dateStr){
 // exception is when today already has its own copy of the same recurring rule
 // (e.g. a daily task) — then today's copy stands and we leave the old one be,
 // so you don't end up with two.
+//
+// CRITICAL: rollover must NOT touch updatedAt. Carry-over is pure housekeeping
+// that every device computes identically from "today" and re-applies after every
+// merge, so the moved date propagates without a timestamp. If rollover stamped a
+// fresh updatedAt, a device still holding a STALE UNDONE copy would, on its next
+// morning roll, out-timestamp a "done" tick made on another device — the
+// last-write-wins merge would then pick the undone version and the task would
+// come back every single day (the "I ticked it off six times" bug). Only real
+// user actions (done, edit, remove, explicit move) may bump updatedAt.
 function rollover(){
   const t=todayStr(); let moved=0;
   // generate today's recurring instances first, so we can dedupe carried ones against them
@@ -1154,11 +1163,11 @@ function rollover(){
       if(todayHasSameRule) continue;      // today's own copy covers it; leave the old one where it is
       // carry it forward as a normal task so it won't be regenerated on its old date
       if(!task.carriedFrom) task.carriedFrom=task.date;
-      task.date=t; task.recurId=null; task.updatedAt=nowISO(); moved++;
+      task.date=t; task.recurId=null; moved++;   // no updatedAt bump — see note above
       continue;
     }
     if(!task.carriedFrom) task.carriedFrom=task.date;
-    task.date=t; task.updatedAt=nowISO(); moved++;
+    task.date=t; moved++;                         // no updatedAt bump — see note above
   }
   return moved;
 }
