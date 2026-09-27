@@ -659,7 +659,7 @@ const DATA_FILE = "data.json";
 // Bump this string on EVERY deploy. On load the app fetches its own file and,
 // if the deployed version is newer than the running one, reloads once (with a
 // cache-busting query) so nobody gets stuck on a stale cached copy.
-const APP_VERSION = "2026-09-27a";
+const APP_VERSION = "2026-09-28a";
 async function checkForUpdate(){
   try{
     const r = await fetch("index.html?vc="+Date.now(), {cache:"no-store"});
@@ -1134,12 +1134,14 @@ function ensureRecurInstances(dateStr){
 }
 
 /* ---------- carry-over ---------- */
-// Move every incomplete, non-removed task dated before today → today.
-// Recurring instances carry too: an unfinished recurring task should follow you
-// forward like anything else, not get stranded on its original day. The one
-// exception is when today already has its own copy of the same recurring rule
-// (e.g. a daily task) — then today's copy stands and we leave the old one be,
-// so you don't end up with two.
+// Move every incomplete, non-removed, NON-RECURRING task dated before today → today.
+//
+// Recurring instances are deliberately NOT carried. Each occurrence of a repeat
+// lives on its own day; a fresh instance appears on the next matching day. If we
+// carried unfinished recurring instances forward, every past occurrence of a
+// weekly/monthly rule would pile onto today as a separate copy (Pay Ricky from
+// last two Wednesdays, Post payroll from three Sundays, ...) — the duplicate
+// mess. So recurring stays put; only genuine one-off tasks roll forward.
 //
 // CRITICAL: rollover must NOT touch updatedAt. Carry-over is pure housekeeping
 // that every device computes identically from "today" and re-applies after every
@@ -1151,23 +1153,15 @@ function ensureRecurInstances(dateStr){
 // user actions (done, edit, remove, explicit move) may bump updatedAt.
 function rollover(){
   const t=todayStr(); let moved=0;
-  // generate today's recurring instances first, so we can dedupe carried ones against them
   ensureRecurInstances(t);
-  const tasks=Object.values(state.tasks);
-  for(const task of tasks){
+  for(const task of Object.values(state.tasks)){
     if(task.removed) continue;
+    if(task.recurId) continue;      // recurring instances stay on their own day (never carry)
     if(task.done) continue;
-    if(task.date >= t) continue;
-    if(task.recurId){
-      const todayHasSameRule = tasks.some(x=>!x.removed && x.recurId===task.recurId && x.date===t && x.id!==task.id);
-      if(todayHasSameRule) continue;      // today's own copy covers it; leave the old one where it is
-      // carry it forward as a normal task so it won't be regenerated on its old date
+    if(task.date < t){
       if(!task.carriedFrom) task.carriedFrom=task.date;
-      task.date=t; task.recurId=null; moved++;   // no updatedAt bump — see note above
-      continue;
+      task.date=t; moved++;         // no updatedAt bump — see note above
     }
-    if(!task.carriedFrom) task.carriedFrom=task.date;
-    task.date=t; moved++;                         // no updatedAt bump — see note above
   }
   return moved;
 }
