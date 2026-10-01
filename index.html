@@ -659,7 +659,7 @@ const DATA_FILE = "data.json";
 // Bump this string on EVERY deploy. On load the app fetches its own file and,
 // if the deployed version is newer than the running one, reloads once (with a
 // cache-busting query) so nobody gets stuck on a stale cached copy.
-const APP_VERSION = "2026-09-28a";
+const APP_VERSION = "2026-10-01a";
 async function checkForUpdate(){
   try{
     const r = await fetch("index.html?vc="+Date.now(), {cache:"no-store"});
@@ -1151,8 +1151,30 @@ function ensureRecurInstances(dateStr){
 // last-write-wins merge would then pick the undone version and the task would
 // come back every single day (the "I ticked it off six times" bug). Only real
 // user actions (done, edit, remove, explicit move) may bump updatedAt.
+/* ---- self-heal: repair orphaned recurring instances left by older builds ---- */
+function healDaybook(){
+  const rx=/^r_(.+)_(\d{4}-\d{2}-\d{2})$/;
+  let healed=0; const endedGroups={};
+  for(const t of Object.values(state.tasks)){
+    if(!t || t.removed) continue;
+    if(t.recurId) continue;                 // already a proper recurring instance
+    const m=(t.id||"").match(rx);
+    if(!m) continue;                        // not a recurring-derived id
+    const rule=state.recurs[m[1]];
+    if(!rule) continue;                     // rule no longer exists; leave as a normal task
+    if(rule.ended){ (endedGroups[m[1]]=endedGroups[m[1]]||[]).push(t); continue; }
+    t.recurId=m[1]; t.date=m[2]; t.carriedFrom=null; t.updatedAt=nowISO(); healed++;  // re-link to its own recurring day
+  }
+  for(const k in endedGroups){              // ended rules never regenerate: collapse dupes to one, keep newest day
+    const arr=endedGroups[k].sort((a,b)=> a.date<b.date?-1:1);
+    for(let i=0;i<arr.length-1;i++){ const t=arr[i]; t.removed=true; t.removedAt=nowISO(); t.updatedAt=nowISO(); healed++; }
+  }
+  if(healed>0){ try{ saveLocal(); }catch(e){} try{ scheduleSync(); }catch(e){} }
+  return healed;
+}
 function rollover(){
   const t=todayStr(); let moved=0;
+  healDaybook();
   ensureRecurInstances(t);
   for(const task of Object.values(state.tasks)){
     if(task.removed) continue;
